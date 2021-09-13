@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.inventory.mapper.ItemMapper">
+
+	<select id="selectAll"  resultType="com.example.inventory.domain.Item">
+		SELECT i.id, i.name, SUM(p.amount) AS amount, i.purchased_at, i.note
+		FROM placements AS p
+		JOIN items AS i
+		ON i.id = p.item_id
+		GROUP BY p.item_id
+		ORDER BY i.name;
+	</select>
+
+</mapper>
+
+
+
+
+
+
