@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <title>備品管理システム</title>
+</head>
+<body>
+<div class="container">
+  <div class="d-flex justify-content-between mb-1">
+    <h1>備品リスト<span class="ml-1 fz-200">(会議室)</span></h1>
+    <div class="mt-2">
+      <a href="admin/login.html" class="fz-175">管理者ログイン</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <form action="index.html">
+        <select class="form-control" name="place">
+          <option value="0">全ての備品を表示</option>
+          <option value="1">倉庫の備品を表示</option>
+          <option value="2">総務部の備品を表示</option>
+          <option value="3">開発部の備品を表示</option>
+          <option value="4" selected>会議室の備品を表示</option>
+        </select>
+      </form>
+
+      <table class="table table-bordered mt-2">
+        <tr>
+          <th>品名</th>
+          <th>数量</th>
+          <th>購入日</th>
+          <th>備考</th>
+        </tr>
+        <tr>
+          <td><a href="show.html">デスクトップPC(DP-100S)</a></td>
+          <td>1</td>
+          <td>2021年07月14日</td>
+          <td>120GBのSSD。メモリは16GB</td>
+        </tr>
+        <tr>
+          <td><a href="show.html">PC用モニター(MN-2000K)</a></td>
+          <td>2</td>
+          <td>2021年07月14日</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><a href="show.html">ホワイトボード</a></td>
+          <td>1</td>
+          <td>2021年08月19日</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><a href="show.html">プロジェクター(PK-1100SB)</a></td>
+          <td>1</td>
+          <td>2021年09月07日</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><a href="show.html">スクリーン</a></td>
+          <td>1</td>
+          <td>2021年09月07日</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <!-- ページ番号 -->
+      <nav>
+        <ul class="pagination">
+          <li class="disabled">
+            <a href="#" aria-label="前のページへ">
+              <span aria-hidden="true">«</span>
+            </a>
+          </li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li>
+            <a href="#" aria-label="次のページへ">
+              <span aria-hidden="true">»</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div><!-- /.col-md-12 -->
+  </div><!-- /.row -->
+</div><!-- /.container -->
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+  // select要素変更時に送信処理
+  $('select').change(function(){
+    $('form').submit();
+  });
+});
+</script>
+</body>
+</html>

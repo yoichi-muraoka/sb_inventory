@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="../css/bootstrap.min.css" rel="stylesheet" />
+<link href="../css/style.css" rel="stylesheet" />
+<title>備品管理システム</title>
+</head>
+<body>
+<div class="container">
+  <h1>登録内容の編集</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <form action="index.html">
+        <table class="table table-bordered">
+          <tr>
+            <th class="w-100px"><label for="formName">品名</label></th>
+            <td><input type="text" id="formName" class="form-control" value="デスクトップPC(DP-100S)"></td>
+          </tr>
+          <tr>
+            <th class="w-100px">配置</th>
+            <td>
+              <div class="mb-2 fz-175">総量:
+                <span class="fz-200" id="amountBefore">8</span>
+                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                <span class="fz-200" id="amountAfter">8</span>
+              </div>
+              <div id="amountList">
+                <span class="d-inline-block mr-2">倉庫: <input type="number" min="0" max="999" step="1" value="1"></span>
+                <span class="d-inline-block mr-2">総務部: <input type="number" min="0" max="999" step="1" value="0"></span>
+                <span class="d-inline-block mr-2">開発部: <input type="number" min="0" max="999" step="1" value="6"></span>
+                <span class="d-inline-block mr-2">会議室: <input type="number" min="0" max="999" step="1" value="1"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th class="w-100px"><label for="formDate">購入日</label></th>
+            <td><input type="date" id="formDate" class="form-control" value="2021-07-14"></td>
+          </tr>
+          <tr>
+            <th class="w-100px"><label for="formNote">備考</label></th>
+            <td>
+              <textarea name="note" id="formNote" class="form-control">120GBのSSD。メモリは16GB</textarea>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">
+              <input type="submit" class="btn btn-primary" value="保存">
+              <button class="btn btn-default" id="back">キャンセル</button>
+            </th>
+          </tr>
+        </table>
+      </form>
+    </div><!-- /.col-md-12 -->
+  </div><!-- /.row -->
+</div><!-- /.container -->
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+// 総量の計算
+$(document).ready(function(){
+  // 元々の総量
+  const amountBefore = $('#amountBefore').text();
+
+  // 変更後の総量
+  let amountAfter = parseInt($('#amountAfter').text());
+  setAmountAfter();
+
+  // 数量の変更を総量に反映
+  $('#amountList input').change(setAmountAfter);
+
+  // 総量が変更されている場合、送信時に確認
+  $('form').submit(function(){
+    if(amountBefore != amountAfter) {
+      return confirm('総量が変更されています。よろしいですか？');
+    }
+  });
+
+  // 変更後の総量をセットする関数
+  function setAmountAfter() {
+    amountAfter = 0;
+    $('#amountList input').each(function(){
+      amountAfter += parseInt($(this).val());
+    });
+    $('#amountAfter').text(amountAfter);
+  }
+});
+</script>
+<script>
+// ブラウザバック
+$(document).ready(function(){
+  $('#back').click(function(){
+    window.history.back();
+    return false;
+  });
+});
+</script>
+</body>
+</html>

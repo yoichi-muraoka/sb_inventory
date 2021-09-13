@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<title>備品管理システム</title>
+</head>
+<body>
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <h1>デスクトップPC(DP-100S)</h1>
+    <div class="mt-2">
+      <a href="admin/login.html" class="fz-175">管理者ログイン</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <dl class="fz-200 d-flex">
+        <dt class="w-100px">購入日</dt>
+        <dd>2021年07月14日</dd>
+      </dl>
+      <dl class="fz-200 d-flex">
+        <dt class="w-100px">備考</dt>
+        <dd>120GBのSSD。メモリは16GB</dd>
+      </dl>
+      <dl>
+        <dt class="fz-200 mb-1">配置</dt>
+        <dd>
+          <table class="table table-bordered w-300px">
+            <tr>
+              <th>場所</th>
+              <th>数量</th>
+            </tr>
+            <tr>
+              <td>倉庫</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>開発部</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>会議室</td>
+              <td>1</td>
+            </tr>
+            <tr class="total">
+              <td>合計</td>
+              <td>8</td>
+            </tr>
+          </table>
+        </dd>
+      </dl>
+      <button class="btn btn-primary" id="back">戻る</button>
+    </div><!-- /.col-md-12 -->
+  </div><!-- /.row -->
+</div><!-- /.container -->
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+// ブラウザバック
+$(document).ready(function(){
+  $('#back').click(function(){
+    window.history.back();
+    return false;
+  });
+});
+</script>
+</body>
+</html>
