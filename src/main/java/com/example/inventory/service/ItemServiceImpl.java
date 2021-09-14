@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.inventory.domain.Item;
+import com.example.inventory.domain.Placement;
 import com.example.inventory.mapper.ItemMapper;
 import com.example.inventory.mapper.PlacementMapper;
 
@@ -28,8 +29,19 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Item getOneById(int id) {
 		Item item = itemMapper.selectById(id);
-		// itemに配置情報をまとめる
+
+		// 配置情報
+		List<Placement> list = placementMapper.selectByItemId(id);
+
+		// 備品の総数
+		int amount = 0;
+		for(Placement p : list) {
+			amount += p.getAmount();
+		}
+
+		// itemに配置情報、備品総数をまとめる
 		item.setPlacementList(placementMapper.selectByItemId(id));
+		item.setAmount(amount);
 		return item;
 	}
 
