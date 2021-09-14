@@ -11,6 +11,11 @@
 		ORDER BY i.name;
 	</select>
 
+	<select id="selectById"  resultType="com.example.inventory.domain.Item"
+	 parameterType="int">
+		SELECT * FROM items WHERE id = #{id};
+	</select>
+
 </mapper>
 
 

@@ -1,6 +1,7 @@
 package com.example.inventory.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,5 +15,6 @@ public class Item {
 
 	// テーブル連携時
 	private Integer amount;
+	private List<Placement> placementList;
 
 }

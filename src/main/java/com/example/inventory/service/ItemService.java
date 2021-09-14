@@ -8,4 +8,6 @@ public interface ItemService {
 
 	List<Item> getAll();
 
+	Item getOneById(int id);
+
 }

@@ -1,54 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/style.css" rel="stylesheet" />
-<title>備品管理システム</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts/setting :: common_head}"></head>
 <body>
 <div class="container">
   <div class="d-flex justify-content-between">
-    <h1>デスクトップPC(DP-100S)</h1>
-    <div class="mt-2">
-      <a href="admin/login.html" class="fz-175">管理者ログイン</a>
-    </div>
+    <h1 th:text="${item.name}"></h1>
+    <div th:replace="~{parts/navigation :: admin_login}"></div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
       <dl class="fz-200 d-flex">
         <dt class="w-100px">購入日</dt>
-        <dd>2021年07月14日</dd>
+        <dd th:text="${#dates.format(item.purchasedAt, 'yyyy年MM月dd日')}"></dd>
       </dl>
       <dl class="fz-200 d-flex">
         <dt class="w-100px">備考</dt>
-        <dd>120GBのSSD。メモリは16GB</dd>
+        <dd th:text="${item.note}"></dd>
       </dl>
       <dl>
         <dt class="fz-200 mb-1">配置</dt>
         <dd>
-          <table class="table table-bordered w-300px">
+          <p th:if="${#lists.size(item.placementList)} <= 0" th:text="在庫はありません。"></p>
+          <table th:if="${#lists.size(item.placementList)} > 0" class="table table-bordered w-300px">
             <tr>
               <th>場所</th>
               <th>数量</th>
             </tr>
-            <tr>
-              <td>倉庫</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>開発部</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td>会議室</td>
-              <td>1</td>
+            <tr th:each="placement : ${item.placementList}">
+              <td th:text="${placement.room.name}"></td>
+              <td th:text="${placement.amount}"></td>
             </tr>
             <tr class="total">
               <td>合計</td>
-              <td>8</td>
+              <td th:text="${item.amount}"></td>
             </tr>
           </table>
         </dd>
@@ -57,8 +42,8 @@
     </div><!-- /.col-md-12 -->
   </div><!-- /.row -->
 </div><!-- /.container -->
-<script src="js/jquery-3.6.0.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
+<script th:replace="~{parts/setting :: common_js}"></script>
 <script>
 // ブラウザバック
 $(document).ready(function(){
