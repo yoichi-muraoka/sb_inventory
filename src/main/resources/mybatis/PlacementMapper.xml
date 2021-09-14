@@ -4,7 +4,7 @@
 
 	<resultMap type="com.example.inventory.domain.Placement" id="roomMap">
 		<result column="amount" property="amount" />
-		<association column="name" property="room" autoMapping="true" />
+		<result column="name" property="room.name" />
 	</resultMap>
 
 	<select id="selectByItemId"  resultMap="roomMap" parameterType="int">
