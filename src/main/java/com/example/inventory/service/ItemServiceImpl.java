@@ -16,6 +16,8 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	ItemMapper itemMapper;
+
+	@Autowired
 	PlacementMapper placementMapper;
 
 	@Override
