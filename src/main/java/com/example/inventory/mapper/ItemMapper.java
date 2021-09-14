@@ -11,4 +11,6 @@ public interface ItemMapper {
 
 	List<Item> selectAll();
 
+	Item selectById(int id);
+
 }
