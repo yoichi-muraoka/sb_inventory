@@ -1,21 +1,24 @@
 package com.example.inventory.test;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.inventory.domain.Item;
-import com.example.inventory.mapper.ItemMapper;
+import com.example.inventory.domain.Placement;
+import com.example.inventory.mapper.PlacementMapper;
 
 @RestController
 public class TestController {
 
 	@Autowired
-	private ItemMapper mapper;
+	private PlacementMapper mapper;
 
 	@GetMapping("/test")
-	public Item test() {
-		return mapper.selectById(4);
+	public List<Placement> test() {
+		List<Placement> list = mapper.selectByItemId(2);
+		return mapper.selectByItemId(2);
 	}
 
 }
