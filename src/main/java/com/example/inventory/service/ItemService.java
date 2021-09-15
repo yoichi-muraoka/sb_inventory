@@ -10,6 +10,6 @@ public interface ItemService {
 
 	Item getOneById(int id);
 
-	List<Item> getByRoomId(int roomId);
+	List<Item> getByRoomId(String roomId);
 
 }

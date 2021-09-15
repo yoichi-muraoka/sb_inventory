@@ -17,7 +17,7 @@
 	</select>
 
 	<select id="selectByRoomId"  resultType="com.example.inventory.domain.Item"
-	 parameterType="int">
+	 parameterType="string">
 		SELECT i.id, i.name, SUM(p.amount) AS amount, i.purchased_at, i.note
 		FROM placements AS p
 		JOIN items AS i

@@ -46,7 +46,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<Item> getByRoomId(int roomId) {
+	public List<Item> getByRoomId(String roomId) {
 		return itemMapper.selectByRoomId(roomId);
 	}
 
