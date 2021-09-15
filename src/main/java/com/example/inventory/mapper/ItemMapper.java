@@ -13,4 +13,6 @@ public interface ItemMapper {
 
 	Item selectById(int id);
 
+	List<Item> selectByRoomId(int roomId);
+
 }

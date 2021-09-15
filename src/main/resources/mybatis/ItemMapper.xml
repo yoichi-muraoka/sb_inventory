@@ -16,10 +16,15 @@
 		SELECT * FROM items WHERE id = #{id};
 	</select>
 
+	<select id="selectByRoomId"  resultType="com.example.inventory.domain.Item"
+	 parameterType="int">
+		SELECT i.id, i.name, SUM(p.amount) AS amount, i.purchased_at, i.note
+		FROM placements AS p
+		JOIN items AS i
+		ON i.id = p.item_id
+		WHERE p.room_id = #{roomId}
+		GROUP BY p.item_id
+		ORDER BY i.name;
+	</select>
+
 </mapper>
-
-
-
-
-
-
