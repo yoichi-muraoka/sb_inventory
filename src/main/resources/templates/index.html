@@ -11,9 +11,9 @@
   <div class="row">
     <div class="col-md-12">
       <form action="" >
-        <select class="form-control" name="place">
-          <option value="0">全ての備品を表示</option>
-          <option th:each="room : ${roomList}" th:text="${room.name}" th:value="${room.id}"></option>
+        <select class="form-control"  name="roomId">
+          <option value="">全ての備品を表示</option>
+          <option th:each="room : ${roomList}" th:text="${room.name}" th:value="${room.id}" th:selected="${room.id.equals(roomId)}"></option>
         </select>
       </form>
 
