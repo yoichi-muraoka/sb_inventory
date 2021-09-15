@@ -10,4 +10,6 @@ public interface ItemService {
 
 	Item getOneById(int id);
 
+	List<Item> getByRoomId(int roomId);
+
 }

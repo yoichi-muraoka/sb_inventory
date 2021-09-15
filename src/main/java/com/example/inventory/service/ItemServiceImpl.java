@@ -45,4 +45,9 @@ public class ItemServiceImpl implements ItemService {
 		return item;
 	}
 
+	@Override
+	public List<Item> getByRoomId(int roomId) {
+		return itemMapper.selectByRoomId(roomId);
+	}
+
 }
