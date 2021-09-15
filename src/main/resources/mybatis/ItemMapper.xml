@@ -18,7 +18,7 @@
 
 	<select id="selectByRoomId"  resultType="com.example.inventory.domain.Item"
 	 parameterType="string">
-		SELECT i.id, i.name, SUM(p.amount) AS amount, i.purchased_at, i.note
+		SELECT i.id, i.name, p.amount, i.purchased_at, i.note
 		FROM placements AS p
 		JOIN items AS i
 		ON i.id = p.item_id
