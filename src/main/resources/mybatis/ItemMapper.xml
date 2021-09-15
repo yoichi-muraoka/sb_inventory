@@ -23,7 +23,6 @@
 		JOIN items AS i
 		ON i.id = p.item_id
 		WHERE p.room_id = #{roomId}
-		GROUP BY p.item_id
 		ORDER BY i.name;
 	</select>
 
