@@ -15,6 +15,6 @@ public interface PlacementMapper {
 
 	Long countByRoomId(String roomId);
 
-	void deleteByItemId();
+	void deleteByItemId(int itemId);
 
 }
