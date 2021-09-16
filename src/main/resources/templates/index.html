@@ -33,24 +33,53 @@
 
       </table>
 
-      <!-- ページ番号 -->
-      <nav>
+      <!--/* ページ番号 */-->
+      <!--/* 2ページ以上の場合に表示 */-->
+      <nav th:if="${totalPages >= 2}">
         <ul class="pagination">
-          <li class="disabled">
-            <a href="#" aria-label="前のページへ">
-              <span aria-hidden="true">«</span>
-            </a>
-          </li>
-          <li class="active"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li>
-            <a href="#" aria-label="次のページへ">
-              <span aria-hidden="true">»</span>
-            </a>
-          </li>
+          <!--/* 前のページへ */-->
+          <th:block th:switch="${page}">
+	          <li th:case="1" class="disabled">
+	            <a href="" aria-label="前のページへ">
+	              <span aria-hidden="true">«</span>
+	            </a>
+	          </li>
+	          <li th:case="*">
+	            <a th:href="@{/(page=${page - 1}, roomId=${roomId})}" aria-label="前のページへ">
+	              <span aria-hidden="true">«</span>
+	            </a>
+	          </li>
+          </th:block>
+
+          <!--/* 各ページ */-->
+          <th:block th:each="index : ${#numbers.sequence(1, totalPages)}">
+	          <th:block th:switch="${index}">
+	              <li th:case="${page}" class="active">
+	                  <a href="" th:text="${index}"></a>
+	              </li>
+	              <li th:case="*">
+	                  <a th:href="@{/(page=${index}, roomId=${roomId})}" th:text="${index}"></a>
+	              </li>
+	          </th:block>
+          </th:block>
+
+
+          <!--/* 次のページへ */-->
+          <th:block th:switch="${page}">
+              <li th:case="${totalPages}" class="disabled">
+                <a href="" aria-label="次のページへ">
+                  <span aria-hidden="true">»</span>
+                </a>
+              </li>
+              <li th:case="*">
+                <a th:href="@{/(page=${page + 1}, roomId=${roomId})}" aria-label="次のページへ">
+                  <span aria-hidden="true">»</span>
+                </a>
+              </li>
+          </th:block>
         </ul>
       </nav>
+
     </div><!-- /.col-md-12 -->
   </div><!-- /.row -->
 </div><!-- /.container -->
