@@ -24,4 +24,6 @@ public interface ItemService {
 
 	int getTotalPagesByRoomId(String roomId);
 
+	void deleteById(int id);
+
 }

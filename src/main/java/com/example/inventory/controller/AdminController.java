@@ -26,4 +26,13 @@ public class AdminController {
 		return ("admin/index");
 	}
 
+	@GetMapping("/delete")
+	public String delete(
+			@RequestParam(name = "id", required = false) Integer id) {
+		if(id != null) {
+			itemService.deleteById(id);
+		}
+		return "redirect:/admin";
+	}
+
 }
