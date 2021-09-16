@@ -16,6 +16,16 @@
 		ORDER BY r.id;
 	</select>
 
+	<select id="countDistinctByItemId" resultType="long">
+		SELECT COUNT(DISTINCT item_id) FROM placements;
+	</select>
+
+	<select id="countByRoomId" resultType="long"
+	 parameterType="string">
+		SELECT COUNT(*) FROM placements
+		WHERE room_id = #{roomId};
+	</select>
+
 </mapper>
 
 

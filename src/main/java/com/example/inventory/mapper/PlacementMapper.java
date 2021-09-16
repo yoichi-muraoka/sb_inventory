@@ -11,4 +11,8 @@ public interface PlacementMapper {
 
 	List<Placement> selectByItemId(int itemId);
 
+	Long countDistinctByItemId();
+
+	Long countByRoomId(String roomId);
+
 }
