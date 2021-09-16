@@ -84,6 +84,12 @@ public class ItemServiceImpl implements ItemService {
 		return (int) Math.ceil((double) totalCount / numPerPage);
 	}
 
+	@Override
+	public void deleteById(int id) {
+		itemMapper.deleteById(id);
+		placementMapper.deleteByItemId(id);
+	}
+
 	private int getOffset(int page) {
 		return numPerPage * (page - 1);
 	}
