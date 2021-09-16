@@ -25,18 +25,24 @@ public class StaffController {
 	@GetMapping("/")
 	public String index(
 			@RequestParam(name = "roomId", defaultValue = "") String roomId,
+			@RequestParam(name = "page", defaultValue = "1") Integer page,
 			Model model) {
 		List<Item> itemList;
+		int totalPages = 0;
 		if(!roomId.isBlank()) {
-			itemList = itemService.getByRoomId(roomId);
+			itemList = itemService.getByRoomIdAndPage(roomId, page);
+			totalPages = itemService.getTotalPagesByRoomId(roomId);
 		}
 		else {
-			itemList = itemService.getAll();
+			itemList = itemService.getByPage(page);
+			totalPages = itemService.getTotalPages();
 		}
 
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("roomList", roomService.getAll());
 		model.addAttribute("roomId", roomId);
+		model.addAttribute("page", page);
+		model.addAttribute("totalPages", totalPages);
 		return "index";
 	}
 
