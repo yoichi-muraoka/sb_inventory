@@ -29,7 +29,7 @@
           <td th:text="${#dates.format(item.purchasedAt, 'yyyy年MM月dd日')}"></td>
           <td th:text="${item.note}"></td>
           <td><a href="edit.html" class="btn btn-warning">編集</a></td>
-          <td><a href="" class="btn btn-danger">削除</a></td>
+          <td><a th:href="@{/admin/delete(id=${item.id})}" class="btn btn-danger">削除</a></td>
         </tr>
       </table>
 
