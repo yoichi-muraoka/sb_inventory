@@ -19,7 +19,7 @@
             <th class="w-100px"><label for="formAmount">総量</label></th>
             <td>
               <p th:errors="*{amount}"></p>
-              <input  th:field="*{amount}" type="number" id="formAmount" min="-1" max="999" step="1" class="form-control">
+              <input  th:field="*{amount}" type="number" id="formAmount" min="0" max="999" step="1" class="form-control">
             </td>
           </tr>
           <tr>
