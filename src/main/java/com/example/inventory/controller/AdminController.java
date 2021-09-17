@@ -3,14 +3,16 @@ package com.example.inventory.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,16 +56,23 @@ public class AdminController {
 	@GetMapping("/add")
 	public String add(Model model) {
 		Item item = new Item();
-		item.setPurchasedAt(new Date()); // 購入日の初期値を本日に設定
+		// 初期値の設定
+		item.setAmount(0);
+		item.setPurchasedAt(new Date());
 		model.addAttribute("item", item);
 		return "admin/add";
 	}
 
 	@PostMapping("/add")
 	public String add(
-			@ModelAttribute Item item,
+			@Valid Item item,
+			Errors errors,
 			Model model) {
-		return "admin/add";
+		if(errors.hasErrors()) {
+			return "admin/add";
+		}
+
+		return "redirect:/admin";
 	}
 
 }

@@ -10,11 +10,17 @@
         <table class="table table-bordered">
           <tr>
             <th class="w-100px"><label for="formName">品名</label></th>
-            <td><input th:field="*{name}" type="text" id="formName" class="form-control"></td>
+            <td>
+              <p th:errors="*{name}"></p>
+              <input th:field="*{name}" type="text" id="formName" class="form-control">
+            </td>
           </tr>
           <tr>
             <th class="w-100px"><label for="formAmount">総量</label></th>
-            <td><input  th:field="*{amount}" type="number" id="formAmount" min="0" max="999" step="1" class="form-control"></td>
+            <td>
+              <p th:errors="*{amount}"></p>
+              <input  th:field="*{amount}" type="number" id="formAmount" min="-1" max="999" step="1" class="form-control">
+            </td>
           </tr>
           <tr>
             <th class="w-100px"><label for="formDate">購入日</label></th>
@@ -23,6 +29,7 @@
           <tr>
             <th class="w-100px"><label for="formNote">備考</label></th>
             <td>
+              <p th:errors="*{note}"></p>
               <textarea th:field="*{note}" name="note" id="formNote" class="form-control"></textarea>
             </td>
           </tr>
