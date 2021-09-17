@@ -72,6 +72,7 @@ public class AdminController {
 			return "admin/add";
 		}
 
+		itemService.add(item);
 		return "redirect:/admin";
 	}
 
