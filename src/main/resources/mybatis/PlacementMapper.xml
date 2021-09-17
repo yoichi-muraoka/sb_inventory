@@ -32,7 +32,7 @@
 
 	<insert id="insert" parameterType="com.example.inventory.domain.Placement">
 		INSERT INTO placements (item_id, room_id, amount)
-		VALUES (#{itemId}, #{roomId}, #{amount});
+		VALUES (#{item.id}, #{room.id}, #{amount});
 	</insert>
 
 </mapper>
