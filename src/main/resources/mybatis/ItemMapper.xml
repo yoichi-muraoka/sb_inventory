@@ -50,4 +50,10 @@
 		DELETE FROM items WHERE id = #{id};
 	</delete>
 
+	<insert id="insert" parameterType="com.example.inventory.domain.Item"
+	 useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO items (name, purchased_at, note)
+		VALUES (#{name}, #{purchasedAt}, #{note});
+	</insert>
+
 </mapper>

@@ -17,4 +17,6 @@ public interface PlacementMapper {
 
 	void deleteByItemId(int itemId);
 
+	void insert(Placement placement);
+
 }
