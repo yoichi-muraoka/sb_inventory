@@ -30,10 +30,9 @@
 		DELETE FROM placements WHERE item_id = #{itemId};
 	</delete>
 
+	<insert id="insert" parameterType="com.example.inventory.domain.Placement">
+		INSERT INTO placements (item_id, room_id, amount)
+		VALUES (#{itemId}, #{roomId}, #{amount});
+	</insert>
+
 </mapper>
-
-
-
-
-
-
