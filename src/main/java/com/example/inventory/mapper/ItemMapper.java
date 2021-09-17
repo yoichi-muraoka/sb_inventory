@@ -22,4 +22,6 @@ public interface ItemMapper {
 
 	void deleteById(int id);
 
+	void insert(Item item);
+
 }
