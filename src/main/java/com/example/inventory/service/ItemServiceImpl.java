@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.inventory.domain.Item;
 import com.example.inventory.domain.Placement;
+import com.example.inventory.domain.Room;
 import com.example.inventory.mapper.ItemMapper;
 import com.example.inventory.mapper.PlacementMapper;
 
@@ -88,6 +89,20 @@ public class ItemServiceImpl implements ItemService {
 	public void deleteById(int id) {
 		itemMapper.deleteById(id);
 		placementMapper.deleteByItemId(id);
+	}
+
+	@Override
+	public void add(Item item) {
+		// 備品の追加
+		itemMapper.insert(item);
+
+		// 配置情報の追加
+		var placement = new Placement();
+		placement.setItem(item);
+		placement.setRoom(new Room());
+		placement.getRoom().setId("R101");
+		placement.setAmount(item.getAmount());
+		placementMapper.insert(placement);
 	}
 
 	private int getOffset(int page) {

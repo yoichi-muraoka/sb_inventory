@@ -26,4 +26,6 @@ public interface ItemService {
 
 	void deleteById(int id);
 
+	void add(Item item);
+
 }
