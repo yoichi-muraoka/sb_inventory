@@ -19,15 +19,15 @@
             <th class="w-100px">配置</th>
             <td>
               <div class="mb-2 fz-175">総量:
-                <span class="fz-200" id="amountBefore">8</span>
+                <span th:text="*{amount}" class="fz-200" id="amountBefore"></span>
                 <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                <span class="fz-200" id="amountAfter">8</span>
+                <span th:text="*{amount}" class="fz-200" id="amountAfter"></span>
               </div>
               <div id="amountList">
-                <span class="d-inline-block mr-2">倉庫: <input type="number" min="0" max="999" step="1" value="1"></span>
-                <span class="d-inline-block mr-2">総務部: <input type="number" min="0" max="999" step="1" value="0"></span>
-                <span class="d-inline-block mr-2">開発部: <input type="number" min="0" max="999" step="1" value="6"></span>
-                <span class="d-inline-block mr-2">会議室: <input type="number" min="0" max="999" step="1" value="1"></span>
+                <span th:each="placement : *{placementList}" class="d-inline-block mr-2">
+                	[[${placement.room.name}]]:
+                	<input type="number" min="0" max="999" step="1" th:value="${placement.amount}">
+                </span>
               </div>
             </td>
           </tr>
