@@ -40,7 +40,7 @@
 		INSERT INTO placements (item_id, room_id, amount)
 		VALUES
 		<foreach collection="list" item="placement" separator=", ">
-			(#{placement.itemId}, #{placement.roomId}, #{placement.amount})
+			(#{placement.item.id}, #{placement.room.id}, #{placement.amount})
 		</foreach>
 		ON DUPLICATE KEY
 		UPDATE amount = VALUES(amount);
