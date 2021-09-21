@@ -43,7 +43,7 @@ public class ItemServiceImpl implements ItemService {
 		}
 
 		// itemに配置情報、備品総数をまとめる
-		item.setPlacementList(placementMapper.selectByItemId(id));
+		item.setPlacementList(list);
 		item.setAmount(amount);
 		return item;
 	}
@@ -130,7 +130,7 @@ public class ItemServiceImpl implements ItemService {
 		}
 
 		// itemに配置情報、備品総数をまとめる
-		item.setPlacementList(placementMapper.selectByItemId(id));
+		item.setPlacementList(list);
 		item.setAmount(amount);
 		return item;
 	}
