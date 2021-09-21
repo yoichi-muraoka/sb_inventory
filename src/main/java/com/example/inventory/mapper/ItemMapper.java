@@ -24,4 +24,6 @@ public interface ItemMapper {
 
 	void insert(Item item);
 
+	void update(Item item);
+
 }

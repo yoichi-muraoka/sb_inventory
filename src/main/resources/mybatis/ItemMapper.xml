@@ -56,4 +56,10 @@
 		VALUES (#{name}, #{purchasedAt}, #{note});
 	</insert>
 
+	<update id="update" parameterType="com.example.inventory.domain.Item">
+		UPDATE items
+		SET name = #{name}, purchased_at = #{purchasedAt}, note = #{note}
+		WHERE id = #{id};
+	</update>
+
 </mapper>
