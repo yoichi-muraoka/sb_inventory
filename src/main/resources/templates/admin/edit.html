@@ -7,6 +7,10 @@
   <div class="row">
     <div class="col-md-12">
       <form action="" method="post" th:object="${item}">
+        <!-- 「保存」押下後の値保持 -->
+        <input th:field="*{id}" type="hidden">
+        <input th:field="*{amount}" type="hidden" id="amountHidden">
+
         <table class="table table-bordered">
           <tr>
             <th class="w-100px"><label for="formName">品名</label></th>
@@ -24,9 +28,11 @@
                 <span th:text="*{amount}" class="fz-200" id="amountAfter"></span>
               </div>
               <div id="amountList">
-                <span th:each="placement : *{placementList}" class="d-inline-block mr-2">
+                <span th:each="placement, status : *{placementList}" class="d-inline-block mr-2">
                 	[[${placement.room.name}]]:
-                	<input type="number" min="0" max="999" step="1" th:value="${placement.amount}">
+                	<!-- 保存」押下後の場所名表示用 -->
+                	<input name="placementList" th:field="*{placementList[__${status.index}__].room.name}" type="hidden">
+                	<input name="placementList" th:field="*{placementList[__${status.index}__].amount}" type="number" min="0" max="999" step="1">
                 </span>
               </div>
             </td>
@@ -78,7 +84,7 @@ $(document).ready(function(){
   // 変更後の総量をセットする関数
   function setAmountAfter() {
     amountAfter = 0;
-    $('#amountList input').each(function(){
+    $('#amountList input:nth-child(2)').each(function(){
       amountAfter += parseInt($(this).val());
     });
     $('#amountAfter').text(amountAfter);

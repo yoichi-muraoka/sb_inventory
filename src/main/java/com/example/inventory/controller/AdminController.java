@@ -93,4 +93,17 @@ public class AdminController {
 		return "admin/edit";
 	}
 
+	@PostMapping("/edit")
+	public String edit(
+			@Valid Item item,
+			Errors errors,
+			Model model) {
+		if(errors.hasErrors()) {
+			return "admin/edit";
+		}
+		return "admin/edit";
+//		itemService.edit(item);
+//		return "redirect:/admin";
+	}
+
 }
