@@ -28,4 +28,8 @@ public interface ItemService {
 
 	void add(Item item);
 
+	void edit(Item item);
+
+	Item getOneByIdToEdit(int id);
+
 }

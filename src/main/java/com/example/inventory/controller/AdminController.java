@@ -3,6 +3,7 @@ package com.example.inventory.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,15 @@ public class AdminController {
 	@GetMapping
 	public String index(
 			@RequestParam(name = "page", defaultValue = "1") Integer page,
+			HttpSession session,
 			Model model) {
 		model.addAttribute("itemList", itemService.getByPage(page));
 		model.addAttribute("page", page);
 		model.addAttribute("totalPages", itemService.getTotalPages());
+
+		// 編集キャンセル時のためにページ番号を保持
+		session.setAttribute("pageNum", page);
+
 		return ("admin/index");
 	}
 
@@ -74,6 +80,41 @@ public class AdminController {
 
 		itemService.add(item);
 		return "redirect:/admin";
+	}
+
+	@GetMapping("/edit")
+	public String edit(
+			@RequestParam(name = "id", required = false) Integer id,
+			Model model) {
+		Item item = null;
+		if(id != null) {
+			item = itemService.getOneByIdToEdit(id);
+		}
+
+		if(item == null) {
+			return "redirect:/admin";
+		}
+
+		model.addAttribute("item", item);
+		return "admin/edit";
+	}
+
+	@PostMapping("/edit")
+	public String edit(
+			@Valid Item item,
+			Errors errors,
+			HttpSession session,
+			Model model) {
+		if(errors.hasErrors()) {
+			return "admin/edit";
+		}
+
+		itemService.edit(item);
+
+		// セッションに格納してあるページ番号を取得
+		Integer pageNum = (Integer) session.getAttribute("pageNum");
+
+		return "redirect:/admin?page=" + pageNum;
 	}
 
 }
