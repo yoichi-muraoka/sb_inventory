@@ -24,4 +24,12 @@ public interface ItemService {
 
 	int getTotalPagesByRoomId(String roomId);
 
+	void deleteById(int id);
+
+	void add(Item item);
+
+	void edit(Item item);
+
+	Item getOneByIdToEdit(int id);
+
 }

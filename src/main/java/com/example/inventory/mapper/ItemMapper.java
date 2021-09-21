@@ -20,4 +20,10 @@ public interface ItemMapper {
 
 	List<Item> selectLimitedByRoomId(@Param("roomId") String roomId, @Param("offset") int offset, @Param("num") int num);
 
+	void deleteById(int id);
+
+	void insert(Item item);
+
+	void update(Item item);
+
 }

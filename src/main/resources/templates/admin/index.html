@@ -1,12 +1,6 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="../css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../css/style.css" rel="stylesheet" />
-  <title>備品管理システム</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts/setting :: common_head}"></head>
 <body>
 <div class="container">
   <div class="d-flex justify-content-between">
@@ -19,7 +13,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <a href="add.html" class="btn btn-primary mt-2 mb-2">備品の追加</a>
+      <a th:href="@{/admin/add}" class="btn btn-primary mt-2 mb-2">備品の追加</a>
       <table class="table table-bordered">
         <tr>
           <th>品名</th>
@@ -29,79 +23,68 @@
           <th>編集</th>
           <th>削除</th>
         </tr>
-        <tr>
-          <td>デスクトップPC(DP-100S)</td>
-          <td>8</td>
-          <td>2021年07月14日</td>
-          <td>120GBのSSD。メモリは16GB</td>
-          <td><a href="edit.html" class="btn btn-warning">編集</a></td>
-          <td><a href="" class="btn btn-danger">削除</a></td>
-        </tr>
-        <tr>
-          <td>PC用モニター(MN-2000K)</td>
-          <td>12</td>
-          <td>2021年07月14日</td>
-          <td></td>
-          <td><a href="edit.html" class="btn btn-warning">編集</a></td>
-          <td><a href="" class="btn btn-danger">削除</a></td>
-        </tr>
-        <tr>
-          <td>ノートPC(FT-2100R)</td>
-          <td>3</td>
-          <td>2021年08月10日</td>
-          <td>オフィス系ソフトがインストール済み</td>
-          <td><a href="edit.html" class="btn btn-warning">編集</a></td>
-          <td><a href="" class="btn btn-danger">削除</a></td>
-        </tr>
-        <tr>
-          <td>プリンター(KTR-2500S)</td>
-          <td>2</td>
-          <td>2021年08月12日</td>
-          <td>複合機。リース</td>
-          <td><a href="edit.html" class="btn btn-warning">編集</a></td>
-          <td><a href="" class="btn btn-danger">削除</a></td>
-        </tr>
-        <tr>
-          <td>A4コピー用紙(500枚)</td>
-          <td>20</td>
-          <td>2021年08月16日</td>
-          <td></td>
-          <td><a href="edit.html" class="btn btn-warning">編集</a></td>
-          <td><a href="" class="btn btn-danger">削除</a></td>
-        </tr>
-        <tr>
-          <td>A3コピー用紙(500枚)</td>
-          <td>5</td>
-          <td>2021年08月16日</td>
-          <td></td>
-          <td><a href="edit.html" class="btn btn-warning">編集</a></td>
-          <td><a href="" class="btn btn-danger">削除</a></td>
+        <tr th:each="item : ${itemList}">
+          <td th:text="${item.name}"></td>
+          <td th:text="${item.amount}"></td>
+          <td th:text="${#dates.format(item.purchasedAt, 'yyyy年MM月dd日')}"></td>
+          <td th:text="${item.note}"></td>
+          <td><a th:href="@{/admin/edit(id=${item.id})}" class="btn btn-warning">編集</a></td>
+          <td><a th:href="@{/admin/delete(id=${item.id})}" class="btn btn-danger">削除</a></td>
         </tr>
       </table>
 
-      <!-- ページ番号 -->
-      <nav>
+      <!--/* ページ番号 */-->
+      <!--/* 2ページ以上の場合に表示 */-->
+      <nav th:if="${totalPages >= 2}">
         <ul class="pagination">
-          <li class="disabled">
-            <a href="#" aria-label="前のページへ">
-              <span aria-hidden="true">«</span>
-            </a>
-          </li>
-          <li class="active"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li>
-            <a href="#" aria-label="次のページへ">
-              <span aria-hidden="true">»</span>
-            </a>
-          </li>
+          <!--/* 前のページへ */-->
+          <th:block th:switch="${page}">
+	          <li th:case="1" class="disabled">
+	            <a href="" aria-label="前のページへ">
+	              <span aria-hidden="true">«</span>
+	            </a>
+	          </li>
+	          <li th:case="*">
+	            <a th:href="@{/admin(page=${page - 1})}" aria-label="前のページへ">
+	              <span aria-hidden="true">«</span>
+	            </a>
+	          </li>
+          </th:block>
+
+          <!--/* 各ページ */-->
+          <th:block th:each="index : ${#numbers.sequence(1, totalPages)}">
+	          <th:block th:switch="${index}">
+	              <li th:case="${page}" class="active">
+	                  <a href="" th:text="${index}"></a>
+	              </li>
+	              <li th:case="*">
+	                  <a th:href="@{/admin(page=${index})}" th:text="${index}"></a>
+	              </li>
+	          </th:block>
+          </th:block>
+
+
+          <!--/* 次のページへ */-->
+          <th:block th:switch="${page}">
+              <li th:case="${totalPages}" class="disabled">
+                <a href="" aria-label="次のページへ">
+                  <span aria-hidden="true">»</span>
+                </a>
+              </li>
+              <li th:case="*">
+                <a th:href="@{/admin(page=${page + 1})}" aria-label="次のページへ">
+                  <span aria-hidden="true">»</span>
+                </a>
+              </li>
+          </th:block>
         </ul>
       </nav>
+
     </div><!-- /.col-md-12 -->
   </div><!-- /.row -->
 </div><!-- /.container -->
-<script src="../js/jquery-3.6.0.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+
+<script th:replace="~{parts/setting :: common_js}"></script>
 <script>
 $(document).ready(function(){
   // 削除操作の確認
