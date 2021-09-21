@@ -105,6 +105,36 @@ public class ItemServiceImpl implements ItemService {
 		placementMapper.insert(placement);
 	}
 
+
+	@Override
+	public void edit(Item item) {
+		// 備品情報の更新
+		itemMapper.update(item);
+
+		// 配置情報の更新
+		placementMapper.insertOrUpdate(item.getPlacementList());
+		placementMapper.deleteZero();
+	}
+
+	@Override
+	public Item getOneByIdToEdit(int id) {
+		Item item = itemMapper.selectById(id);
+
+		// 配置情報
+		List<Placement> list = placementMapper.selectAllByItemId(id);
+
+		// 備品の総数
+		int amount = 0;
+		for(Placement p : list) {
+			amount += p.getAmount();
+		}
+
+		// itemに配置情報、備品総数をまとめる
+		item.setPlacementList(placementMapper.selectByItemId(id));
+		item.setAmount(amount);
+		return item;
+	}
+
 	private int getOffset(int page) {
 		return numPerPage * (page - 1);
 	}
