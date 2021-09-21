@@ -7,6 +7,12 @@
 		<result column="name" property="room.name" />
 	</resultMap>
 
+	<resultMap type="com.example.inventory.domain.Placement" id="detailedRoomMap">
+		<result column="amount" property="amount" />
+		<result column="id" property="room.id" />
+		<result column="name" property="room.name" />
+	</resultMap>
+
 	<select id="selectByItemId"  resultMap="roomMap" parameterType="int">
 		SELECT r.name, p.amount
 		FROM placements AS p
@@ -53,8 +59,8 @@
 	</delete>
 
 	<!-- selectByIdの拡張版 -->
-	<select id="selectAllByItemId"  resultMap="roomMap" parameterType="int">
-		SELECT r.name, IFNULL(p.amount, 0) AS amount
+	<select id="selectAllRoomsByItemId"  resultMap="detailedRoomMap" parameterType="int">
+		SELECT r.id, r.name, IFNULL(p.amount, 0) AS amount
 		FROM (
 			SELECT p.room_id, p.amount
 			FROM placements AS p
