@@ -23,4 +23,6 @@ public interface PlacementMapper {
 
 	void deleteZero();
 
+	List<Placement> selectAllByItemId(int itemId);
+
 }
