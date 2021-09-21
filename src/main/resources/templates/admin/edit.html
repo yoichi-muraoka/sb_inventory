@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="../css/bootstrap.min.css" rel="stylesheet" />
-<link href="../css/style.css" rel="stylesheet" />
-<title>備品管理システム</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts/setting :: common_head}"></head>
 <body>
 <div class="container">
   <h1>登録内容の編集</h1>
   <div class="row">
     <div class="col-md-12">
-      <form action="index.html">
+      <form action="" method="post" th:object="${item}">
         <table class="table table-bordered">
           <tr>
             <th class="w-100px"><label for="formName">品名</label></th>
-            <td><input type="text" id="formName" class="form-control" value="デスクトップPC(DP-100S)"></td>
+            <td>
+              <p th:errors="*{name}"></p>
+              <input th:field="*{name}" type="text" id="formName" class="form-control">
+            </td>
           </tr>
           <tr>
             <th class="w-100px">配置</th>
@@ -36,12 +33,13 @@
           </tr>
           <tr>
             <th class="w-100px"><label for="formDate">購入日</label></th>
-            <td><input type="date" id="formDate" class="form-control" value="2021-07-14"></td>
+            <td><input th:field="*{purchasedAt}" type="date" id="formDate" class="form-control"></td>
           </tr>
           <tr>
             <th class="w-100px"><label for="formNote">備考</label></th>
             <td>
-              <textarea name="note" id="formNote" class="form-control">120GBのSSD。メモリは16GB</textarea>
+              <p th:errors="*{note}"></p>
+              <textarea th:field="*{note}" name="note" id="formNote" class="form-control"></textarea>
             </td>
           </tr>
           <tr>
@@ -55,8 +53,8 @@
     </div><!-- /.col-md-12 -->
   </div><!-- /.row -->
 </div><!-- /.container -->
-<script src="../js/jquery-3.6.0.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+
+<script th:replace="~{parts/setting :: common_js}"></script>
 <script>
 // 総量の計算
 $(document).ready(function(){

@@ -76,4 +76,21 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 
+	@GetMapping("/edit")
+	public String edit(
+			@RequestParam(name = "id", required = false) Integer id,
+			Model model) {
+		Item item = null;
+		if(id != null) {
+			item = itemService.getOneByIdToEdit(id);
+		}
+
+		if(item == null) {
+			return "redirect:/admin";
+		}
+
+		model.addAttribute("item", item);
+		return "admin/edit";
+	}
+
 }
