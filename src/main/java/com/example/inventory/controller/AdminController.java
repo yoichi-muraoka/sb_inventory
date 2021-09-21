@@ -101,9 +101,9 @@ public class AdminController {
 		if(errors.hasErrors()) {
 			return "admin/edit";
 		}
-		return "admin/edit";
-//		itemService.edit(item);
-//		return "redirect:/admin";
+
+		itemService.edit(item);
+		return "redirect:/admin";
 	}
 
 }
