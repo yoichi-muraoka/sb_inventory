@@ -111,6 +111,11 @@ public class ItemServiceImpl implements ItemService {
 		// 備品情報の更新
 		itemMapper.update(item);
 
+		// 配置情報に備品IDの情報を付与
+		for(Placement placement : item.getPlacementList()) {
+			placement.setItem(item);
+		}
+
 		// 配置情報の更新
 		placementMapper.insertOrUpdate(item.getPlacementList());
 		placementMapper.deleteZero();
@@ -121,7 +126,7 @@ public class ItemServiceImpl implements ItemService {
 		Item item = itemMapper.selectById(id);
 
 		// 配置情報
-		List<Placement> list = placementMapper.selectAllByItemId(id);
+		List<Placement> list = placementMapper.selectAllRoomsByItemId(id);
 
 		// 備品の総数
 		int amount = 0;
