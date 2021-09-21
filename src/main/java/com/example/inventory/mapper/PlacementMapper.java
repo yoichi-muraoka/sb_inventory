@@ -19,4 +19,8 @@ public interface PlacementMapper {
 
 	void insert(Placement placement);
 
+	void insertOrUpdate(List<Placement> placementList);
+
+	void deleteZero();
+
 }
