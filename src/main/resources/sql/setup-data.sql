@@ -75,3 +75,21 @@ JOIN rooms AS r
 ON p.room_id = r.id
 WHERE p.item_id = 1
 ORDER BY r.id;
+
+
+-- ++++++++++++++++++++++
+--         課題04
+-- ++++++++++++++++++++++
+-- テーブルの作成
+USE sb_inventorydb;
+
+CREATE TABLE admins (
+login_id VARCHAR(10) PRIMARY KEY,
+login_pass CHAR(60) NOT NULL,
+name VARCHAR(30) NOT NULL
+);
+
+-- 初期データの投入(login_passは「pass」をハッシュ化したもの)
+INSERT INTO admins VALUES
+('taro', '$2a$08$D0F.hJaws5DSugJkgsKpueWsccfLmpnzp6rHF5ZQSX9EmbUXpZ8bS', '山田太郎'),
+('jiro', '$2a$08$D0F.hJaws5DSugJkgsKpueWsccfLmpnzp6rHF5ZQSX9EmbUXpZ8bS', '鈴木次郎');

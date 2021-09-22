@@ -1,12 +1,6 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="../css/bootstrap.min.css" rel="stylesheet" />
-<link href="../css/style.css" rel="stylesheet" />
-<title>備品管理システム</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts/setting :: common_head}"></head>
 <body>
 <div class="container">
   <div class="row">
@@ -15,18 +9,17 @@
         <div class="panel-heading">備品管理システム ログイン</div>
         <div class="panel-body">
 
-          <!-- ↓↓エラーメッセージがある場合↓↓ -->
-          <div class="alert alert-danger">
-            ログインIDかパスワードが正しくありません。
-          </div>
-          <!-- ↑↑エラーメッセージがある場合↑↑ -->
+          <th:block th:object="${admin}">
+            <div th:errors="*{loginId}" class="alert alert-danger"></div>
+            <div th:errors="*{loginPass}" class="alert alert-danger"></div>
+          </th:block>
 
-          <form action="index.html">
+          <form action="" method="post" th:object="${admin}">
             <div class="form-group">
-              <input type="text" name="loginId" placeholder="ログインID" class="form-control" />
+              <input th:field="*{loginId}" type="text" placeholder="ログインID" class="form-control" />
             </div>
             <div class="form-group">
-              <input type="password" name="loginPass" placeholder="パスワード" class="form-control" />
+              <input th:field="*{loginPass}" type="password" placeholder="パスワード" class="form-control" />
             </div>
             <div class="form-group">
               <input type="submit" class="btn btn-primary btn-block" value="ログイン" />
@@ -38,7 +31,7 @@
     </div><!-- /.col-md-offset-3.col-md-6 -->
   </div><!-- /.row -->
 </div><!-- /.container -->
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
+<script th:replace="~{parts/setting :: common_js}"></script>
 </body>
 </html>
