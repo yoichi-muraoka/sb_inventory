@@ -6,8 +6,8 @@
   <div class="d-flex justify-content-between">
     <h1>備品リスト</h1>
     <div class="mt-4">
-      <span class="fz-200">山田太郎</span>さん
-      [ <a href="login.html">ログアウト</a> ]
+      <span class="fz-200" th:text="${session.name}"></span>さん
+      [ <a th:href="@{/admin/logout}">ログアウト</a> ]
     </div>
   </div>
 
