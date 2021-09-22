@@ -49,5 +49,10 @@ public class LoginController {
 		return "redirect:/admin";
 	}
 
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/admin/login";
+	}
 
 }
