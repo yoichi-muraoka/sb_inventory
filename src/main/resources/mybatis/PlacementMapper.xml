@@ -29,7 +29,8 @@
 	<select id="countByRoomId" resultType="long"
 	 parameterType="string">
 		SELECT COUNT(*) FROM placements
-		WHERE room_id = #{roomId};
+		WHERE room_id = #{roomId}
+		AND amount > 0;
 	</select>
 
 	<delete id="deleteByItemId" parameterType="int">
