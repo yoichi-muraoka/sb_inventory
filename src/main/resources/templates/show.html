@@ -21,16 +21,18 @@
       <dl>
         <dt class="fz-200 mb-1">配置</dt>
         <dd>
-          <p th:if="${#lists.size(item.placementList)} <= 0" th:text="在庫はありません。"></p>
-          <table th:if="${#lists.size(item.placementList)} > 0" class="table table-bordered w-300px">
+          <span class="fz-200" th:if="${item.amount} <= 0" th:text="在庫はありません。"></span>
+          <table th:if="${item.amount} > 0" class="table table-bordered w-300px">
             <tr>
               <th>場所</th>
               <th>数量</th>
             </tr>
-            <tr th:each="placement : ${item.placementList}">
+            <th:blcok th:each="placement : ${item.placementList}">
+            <tr th:if="${placement.room.name} != '倉庫' OR ${placement.amount} != 0">
               <td th:text="${placement.room.name}"></td>
               <td th:text="${placement.amount}"></td>
             </tr>
+            </th:blcok>
             <tr class="total">
               <td>合計</td>
               <td th:text="${item.amount}"></td>
