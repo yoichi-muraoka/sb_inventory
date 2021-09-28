@@ -14,7 +14,7 @@
 
 
 ## 課題の進め方
-- モックのHTMLを元に作業を始める
+- [モックのHTML](https://github.com/yoichi-muraoka/inventory_mock)を元に作業を始める
 - 自身の理解度に応じて、取り組み方を決める
 
 | 難易度 | 取り組み方 |
